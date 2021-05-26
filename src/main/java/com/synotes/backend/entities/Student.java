@@ -32,6 +32,11 @@ public class Student {
     @ManyToOne(fetch = FetchType.LAZY)
     private Test test;
 
+    // Student and Feedback relation
+    //One student one Feedback
+    @OneToOne(mappedBy = "student", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private Feedback feedback;
+
     public Student(){
 
     }
