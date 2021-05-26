@@ -24,6 +24,11 @@ public class McqQuestions {
     @Column(length = 20, nullable = false)
     private String category;
 
+    //McqQuestion and Test Relation
+    //Many McqQuestion have One Test
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Test test;
+
     public McqQuestions(){
 
     }

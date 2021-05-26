@@ -1,7 +1,11 @@
 package com.synotes.backend.entities;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "Admin")
@@ -20,6 +24,11 @@ public class Admin {
 
     @Column(length = 10, nullable = false)
     private String password;
+
+//    //Admin and Test Relation
+//    //One Admin has many Test
+    @OneToMany(mappedBy = "admin")
+    private List<Test> test = new ArrayList<>();
 
     public Admin(){
 

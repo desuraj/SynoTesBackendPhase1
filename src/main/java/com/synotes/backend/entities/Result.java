@@ -22,8 +22,6 @@ public class Result {
     @Column(length = 2)
     private Integer fundamental;
 
-    @OneToOne(mappedBy = "result")
-    private Test test;
 
     public Result(){
 
@@ -36,6 +34,15 @@ public class Result {
         this.fundamental = fundamental;
         this.coding = coding;
     }
+
+    public long getResultId() {
+        return resultId;
+    }
+
+    public void setResultId(long resultId) {
+        this.resultId = resultId;
+    }
+
 
     public Integer getNumericalAbility() {
         return numericalAbility;

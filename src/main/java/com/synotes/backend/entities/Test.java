@@ -16,7 +16,7 @@ public class Test {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "testId", nullable = false, unique = true)
+    @Column(nullable = false, unique = true)
     private Long testId;
 
     @Column(name = "name", nullable = false)
@@ -28,15 +28,21 @@ public class Test {
     @Column(name = "time", nullable = false)
     private java.sql.Time time;
 
+    //Test and Student Relation
     //One Test has many students
-    @OneToMany(targetEntity = Student.class, mappedBy = "test", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JsonIgnore
+    @OneToMany(mappedBy = "test")
     private List<Student> student = new ArrayList<>();
 
-    // One Test has One Result // testId column in Test is the Foreign key to Result
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "TestId",referencedColumnName = "testId")
-    private Result result;
+
+    //Test and Admin Relation
+    // Many Test have One Admin
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Admin admin;
+
+    //Test and McqQuestion Relation
+    // One Test have Many McqQuestion
+    @OneToMany(mappedBy = "test")
+    private List<McqQuestions> mcqQuestions  = new ArrayList<>();
 
 
     public Test(){
@@ -52,13 +58,6 @@ public class Test {
         this.totalMarks = totalMarks;
     }
 
-    public List<Student> getStudent() {
-        return student;
-    }
-
-    public void setStudent(List<Student> student) {
-        this.student = student;
-    }
 
     public Long getTestId() {
         return testId;

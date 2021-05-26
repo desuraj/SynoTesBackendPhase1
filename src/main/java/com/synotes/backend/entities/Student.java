@@ -26,6 +26,8 @@ public class Student {
     @Column(length = 100, nullable = false)
     private String College;
 
+
+    // Student and Test Relation
     //Many Student have One Test
     @ManyToOne(fetch = FetchType.LAZY)
     private Test test;
@@ -43,13 +45,7 @@ public class Student {
         College = college;
     }
 
-    public Test getTest() {
-        return test;
-    }
 
-    public void setTest(Test test) {
-        this.test = test;
-    }
 
     public long getUserId() {
         return userId;
