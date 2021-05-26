@@ -1,51 +1,70 @@
 package com.synotes.backend.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
 
 @Entity
-@Table(name = "Student")
+@Table(name = "student")
 public class Student {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(nullable = false,unique = true)
+    @Column(name = "userId", nullable = false, unique = true)
     private long userId;
 
-    @Column(length = 15, nullable = false)
+    @Column(name = "firstName", nullable = false)
     private String firstName;
 
-    @Column(length = 15, nullable = false)
+    @Column(name = "lastName")
     private String lastName;
 
-    @Column(length = 50, nullable = false, unique = true)
+    @Column(name = "email", nullable = false)
     private String email;
 
-    @Column(length = 10, nullable = false, unique = true)
+    @Column(name = "mobile", nullable = false)
     private String mobile;
 
-    @Column(length = 100, nullable = false)
-    private String College;
+    @Column(name = "college", nullable = false)
+    private String college;
 
+    private boolean enabled = true;
 
-    // Student and Test Relation
-    //Many Student have One Test
-    @ManyToOne(fetch = FetchType.LAZY)
-    private Test test;
+    //Admin and Student Relation
+    //Many students has one Admin
 
-    public Student(){
+    @ManyToOne(targetEntity=Admin.class, cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JsonIgnore
+    private Admin admin;
+
+    //Constructors
+
+    public Student() {
 
     }
 
-    public Student(long userId, String firstName, String lastName, String email, String mobile, String college) {
+    public Student(long userId, String firstName, String lastName, String email, String mobile, String college, boolean enabled) {
         this.userId = userId;
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
         this.mobile = mobile;
-        College = college;
+        this.college = college;
+        this.enabled = enabled;
     }
 
+    //Getters and Setters
 
+    /*public List<Admin> getAdmin() {
+        return Admin;
+    }
+
+    public void setAdmin(List<Admin> admin) {
+        this.Admin = admin;
+    }*/
 
     public long getUserId() {
         return userId;
@@ -88,12 +107,19 @@ public class Student {
     }
 
     public String getCollege() {
-        return College;
+        return college;
     }
 
     public void setCollege(String college) {
-        College = college;
+        this.college = college;
     }
 
+    public boolean isEnabled() {
+        return enabled;
+    }
+
+    public void setEnabled(boolean enabled) {
+        this.enabled = enabled;
+    }
 
 }

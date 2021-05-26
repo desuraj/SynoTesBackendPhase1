@@ -12,7 +12,7 @@
 	<artifactId>backend</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>backend</name>
-	<description>[Synotes] Backend development || 5/19/2021 </description>
+	<description>[Synotes] | Backend Development | Phase 1</description>
 	<properties>
 		<java.version>11</java.version>
 	</properties>
